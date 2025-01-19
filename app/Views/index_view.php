@@ -1,83 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Pablo">
-        <title>PortManager</title>
-        <link rel="stylesheet" href="./css/index.css">
-    </head>
-    <body>
-        <header>
-            <h1>PortManager</h1>
-            <p>¡Bienvenido <?php echo $data["usuario"] ?>!</p>
-        </header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Pablo">
+    <title>PortManager</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<?php
+$perfiles = $data["perfiles"];
+?>
+
+<body>
+    <header>
+        <h1>PortManager</h1>
+        <p>¡Bienvenido <?php echo $data["usuario"]["name"] ?>!</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <?php
+            foreach ($perfiles as $perfil) {
+                if ($_SESSION["usuario"]["id"] == $perfil["id"]) {
+                    if ($perfil["visible"] == 1) {
+                        echo "<li><a href='/visibility'>Ocultar perfil</a></li>";
+                    } else {
+                        echo "<li><a href='/visibility'>Mostrar perfil</a></li>";
+                    }
+                }
+            }
+            ?>
+            <li><a href="/logout">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+    <div class="mainDiv">
         <main>
             <h2>Mi portfolio</h2>
             <?php
-                echo "<h2>" . $data["portfolio"]["title"] . "</h2>";
+            echo "<h2>" . $data["portfolio"]["title"] . "</h2>";
+            echo "<img id='photoSmall' src='./media/" . $data["portfolio"]["photo"] . "' alt=''>";
+            echo "<div>";
+            echo "<h4>Experiencia</h4>";
+            echo "<a href='/add/job'>Añadir</a>";
+            foreach ($data["portfolio"]["jobs"] as $job) {
+                echo "<div class='job'>";
+                echo "<h4> Trabajo: " . $job["title"] . "</h4>";
+                echo "<a href='/edit/job/" . $job["id"] . "'>Editar</a> <a href='/delete/job/" . $job["id"] . "'>Borrar</a>";
+                echo "<ul>";
+                echo "<li> Descripcion: " . $job["description"] . "</li>";
+                echo "<li> Fecha de Inicio: " . $job["start_date"] . "</li>";
+                echo "<li> Fecha de Fin: " . $job["finish_date"] . "</li>";
+                echo "<li> Logros: " . $job["achievements"] . "</li>";
+                echo "</ul>";
+                echo "</div>";
+            }
+            echo "</div>";
 
-                echo "<div>";
-                    echo "<h4>Experiencia</h4>"; 
-                    echo "<a href='/add/job'>Añadir</a>";
-                    foreach ($data["portfolio"]["jobs"] as $job) {
-                        echo "<div class='job'>";
-                            echo "<h4> Trabajo: " . $job["title"] . "</h4>";
-                            echo "<a href='/edit/job/".$job["id"]."'>Editar</a> <a href='/delete/job/".$job["id"]."'>Borrar</a>";
-                            echo "<ul>";
-                                echo "<li> Descripcion: " . $job["description"] . "</li>";
-                                echo "<li> Fecha de Inicio: " . $job["start_date"] . "</li>";
-                                echo "<li> Fecha de Fin: " . $job["finish_date"] . "</li>";
-                                echo "<li> Logros: " . $job["achievements"] . "</li>";
-                            echo "</ul>";
-                        echo "</div>";
-                    }
+            echo "<div>";
+            echo "<h4>Proyectos</h4>";
+            echo "<a href='/add/project'>Añadir</a>";
+            foreach ($data["portfolio"]["projects"] as $project) {
+                echo "<div class='job'>";
+                echo "<h4> Proyecto: " . $project["title"] . "</h4>";
+                echo "<a href='/edit/project/" . $project["id"] . "'>Editar</a> <a href='/delete/project/" . $project["id"] . "'>Borrar</a>";
+                echo "<ul>";
+                echo "<li> Descripcion: " . $project["description"] . "</li>";
+                echo "<li> Technologies: " . $project["technologies"] . "</li>";
+                echo "</ul>";
                 echo "</div>";
+            }
+            echo "</div>";
 
-                echo "<div>";
-                    echo "<h4>Proyectos</h4>";
-                    echo "<a href='/add/project'>Añadir</a>";
-                    foreach ($data["portfolio"]["projects"] as $project) {
-                        echo "<div class='job'>";
-                            echo "<h4> Proyecto: " . $project["title"] . "</h4>";
-                            echo "<a href='/edit/project/".$project["id"]."'>Editar</a> <a href='/delete/project/".$project["id"]."'>Borrar</a>";
-                            echo "<ul>";
-                                echo "<li> Descripcion: " . $project["description"] . "</li>";
-                                echo "<li> Technologies: " . $project["technologies"] . "</li>";
-                            echo "</ul>";
-                        echo "</div>";
-                    }
+            echo "<div>";
+            echo "<h4>Skills</h4>";
+            echo "<a href='/add/skill'>Añadir</a>";
+            foreach ($data["portfolio"]["skills"] as $skill) {
+                echo "<div class='job'>";
+                echo "<h4> Skill: " . $skill["name"] . "</h4>";
+                echo "<a href='/edit/skill/" . $skill["id"] . "'>Editar</a> <a href='/delete/skill/" . $skill["id"] . "'>Borrar</a>";
                 echo "</div>";
-            
-                echo "<div>";
-                    echo "<h4>Skills</h4>";
-                    echo "<a href='/add/skill'>Añadir</a>";
-                    foreach ($data["portfolio"]["skills"] as $skill) {
-                        echo "<div class='job'>";
-                            echo "<h4> Skill: " . $skill["name"] . "</h4>";
-                            echo "<a href='/edit/skill/".$skill["id"]."'>Editar</a> <a href='/delete/skill/".$skill["id"]."'>Borrar</a>";
-                        echo "</div>";
-                    }
+            }
+            echo "</div>";
+
+            echo "<div>";
+            echo "<h4>Redes Sociales</h4>";
+            echo "<a href='/add/social'>Añadir</a>";
+            foreach ($data["portfolio"]["socialNetworks"] as $socialNetwork) {
+                echo "<div class='job'>";
+                echo "<h4> Red: " . $socialNetwork["name"] . "</h4>";
+                echo "<a href='/edit/social/" . $socialNetwork["id"] . "'>Editar</a> <a href='/delete/social/" . $socialNetwork["id"] . "'>Borrar</a>";
+                echo "<h5> URL: <a href='" . $socialNetwork["url"] . "' target='_blank'>" . $socialNetwork["url"] . "</a></h5>";
                 echo "</div>";
-            
-                echo "<div>";
-                    echo "<h4>Redes Sociales</h4>";
-                    echo "<a href='/add/social'>Añadir</a>";
-                    foreach ($data["portfolio"]["socialNetworks"] as $socialNetwork) {
-                        echo "<div class='job'>";
-                            echo "<h4> Red: " . $socialNetwork["name"] . "</h4>";
-                            echo "<a href='/edit/social/".$socialNetwork["id"]."'>Editar</a> <a href='/delete/social/".$socialNetwork["id"]."'>Borrar</a>";
-                            echo "<h5> URL: <a href='".$socialNetwork["url"]."' target='_blank'>".$socialNetwork["url"]."</a></h5>";
-                        echo "</div>";    
-                    }
-                echo "</div>";
+            }
+            echo "</div>";
             ?>
         </main>
-    </body>
+        <aside>
+            <h3>Búsqueda de perfiles</h3>
+            <form action="/search" method="POST">
+                <input type="text" name="termino" id="termino" placeholder="Buscar...">
+                <input type="submit" value="Buscar">
+            </form>
+            <?php
+
+            if (isset($data["usuario"]["active_account"]) && $data["usuario"]["active_account"] == 1) {
+                if (isset($perfiles) && count($perfiles) > 0) {
+                    foreach ($perfiles as $perfil) {
+                        if ($perfil["visible"] == 1) {
+                            echo "<div id='profile'>";
+                            echo "<img id='photo' src='./media/" . $perfil["photo"] . "' alt=''>";
+                            echo "<h4>Nombre: " . $perfil["name"] . "</h4>";
+                            echo "<h5>Apellido: " . $perfil["surname"] . "</h5>";
+                            echo "<h5>Email: " . $perfil["email"] . "</h5>";
+                            echo "</div>";
+                        }
+                    }
+                } else {
+                    echo "<p>No se encontraron perfiles que coincidan con tu búsqueda.</p>";
+                }
+            } else {
+                echo "<p>Tu cuenta no está activa. No puedes realizar búsquedas de perfiles.</p>";
+            }
+
+
+            ?>
+        </aside>
+    </div>
+
+</body>
+
 </html>

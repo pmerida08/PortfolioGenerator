@@ -31,6 +31,20 @@
     );
 
     $router->add(array(
+        "name" => "search",
+        "path" => "/^\/search$/",
+        "action" => [IndexController::class, "searchAction"],
+        "auth" => ["usuario"])
+    );
+
+    $router->add(array(
+        "name" => "visible",
+        "path" => "/^\/visibility$/",
+        "action" => [IndexController::class, "visibilityAction"],
+        "auth" => ["usuario"])
+    );
+
+    $router->add(array(
         "name" => "Login",
         "path" => "/^\/login$/", 
         "action" => [AuthController::class, "loginAction"], 
