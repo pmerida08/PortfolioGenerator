@@ -41,8 +41,16 @@ class Users extends DBAbstractModel
             $this->params[$key] = $value;
         }
 
-        $this->query = "INSERT INTO users (name, surname, email, password) values (:name, :surname, :email, :password)";
+        $rb = random_bytes(32);
+        $token = base64_encode($rb);
+        $secureToken = uniqid('', true) . $token;
+        $expiration = date('Y-m-d H:i:s', strtotime('+24 hours'));
 
+        $this->query = "INSERT INTO users (name, surname, email, password, token, token_expiration) 
+                    VALUES (:name, :surname, :email, :password, :token, :token_expiration)";
+
+        $this->params["token"] = $secureToken;
+        $this->params["token_expiration"] = $expiration;
         $this->get_results_from_query();
     }
 
@@ -82,5 +90,40 @@ class Users extends DBAbstractModel
         $this->params["termino"] = "%$termino%";
         $this->get_results_from_query();
         return $this->rows ?? [];
+    }
+
+    public function activate($token)
+    {
+        $this->query = "SELECT * FROM users WHERE token = :token";
+        $this->params["token"] = $token;
+        $this->get_results_from_query();
+
+        if (count($this->rows) == 1) {
+            $this->query = "UPDATE users SET active = 1 WHERE token = :token";
+            $this->get_results_from_query();
+        }
+    }
+
+    public function getTokenByEmail($email)
+    {
+        $this->query = "SELECT token FROM users WHERE email = :email";
+        $this->params["email"] = $email;
+        $this->get_results_from_query();
+        return $this->rows[0]["token"] ?? "";
+    }
+
+    public function getUserByToken($token)
+    {
+        $this->query = "SELECT * FROM users WHERE token = :token";
+        $this->params["token"] = $token;
+        $this->get_results_from_query();
+        return $this->rows[0] ?? null;
+    }
+
+    public function activateUser($token)
+    {
+        $this->query = "UPDATE users SET active_account = 1 WHERE token = :token";
+        $this->params["token"] = $token;
+        $this->get_results_from_query();
     }
 }
