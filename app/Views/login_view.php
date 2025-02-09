@@ -13,8 +13,14 @@
     <header>
         <h1>PortManager</h1>
         <h2>Inicio de sesión</h2>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
+
         <p style="color: red"> <?php echo $data["message"] ?></p>
         <form action="/login" method="post">
             <label for="email">Email

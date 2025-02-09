@@ -20,31 +20,15 @@ header h1 {
 }
 
 header p {
+    margin: 10px 0 0;
     font-size: 1.2em;
-}
-
-.user{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 20px;
-}
-
-.user #avatar {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid #f8f9fa;
-    background-color: #f8f9fa;
 }
 
 /* Navigation Styles */
 nav {
     background-color: #343a40;
     padding: 10px 20px;
-    
+    text-align: center;
 }
 
 nav ul {
@@ -73,37 +57,34 @@ nav ul li a:hover {
 /* Main Content */
 
 
+
+aside {
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 300px;
+    height: fit-content;
+}
+
 .portfolios {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 20px;
     list-style: none;
 }
 
-#avatar {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid #f8f9fa;
-    background-color: #f8f9fa;
-}
-
 #photoSmall {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+    width: 10%;
     border-radius: 8px;
 }
 
 #profile {
-    display: block;
-    justify-items: center;
-    align-items: center;
-    width: 15vw;
-    border-radius: 50px;
-    border: 1px solid #f8f9fa;
+    margin-top: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 10px;
     background-color: #f8f9fa;
 }
 
@@ -124,6 +105,35 @@ main h2 {
 }
 
 /* Sections */
+main h4 {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #495057;
+}
+
+.job {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.job h4 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.job ul {
+    margin: 10px 0 0;
+    padding-left: 20px;
+}
+
+.job ul li {
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
 /* Links */
 a {
     color: #007bff;

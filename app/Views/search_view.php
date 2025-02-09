@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Pablo">
     <title>PortManager</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <?php
@@ -18,7 +18,7 @@ $perfiles = $data["perfiles"];
         <h1>PortManager</h1>
         <div class="user">
             <p>¡Bienvenido <?php echo $data["usuario"]["name"] ?? $data["invitadoUser"] ?>!</p>
-            <img id="avatar" src="./media/<?php echo $data["img"] ?? "user.jpg" ?>" alt="">
+            <img id="avatar" src="/media/<?php echo $data["img"] ?? "user.jpg" ?>" alt="">
         </div>
     </header>
     <nav>
@@ -38,7 +38,7 @@ $perfiles = $data["perfiles"];
                 <li><a href="/logout">Cerrar sesión</a></li>
             <?php }; ?>
             <li>
-                <form action="/search/" method="POST">
+                <form action="" method="POST">
                     <input type="text" name="termino" id="termino" placeholder="Buscar...">
                     <input type="submit" value="Buscar">
                 </form>
@@ -55,7 +55,7 @@ $perfiles = $data["perfiles"];
                 if ($perfil["visible"] != 0) {
                     echo "<li id='profile'>";
                     echo "<h3>" . $perfil["name"] . " " . $perfil["surname"] . "</h3>";
-                    echo "<img id='photoSmall' src='./media/" . $perfil["photo"] . "' alt=''>";
+                    echo "<img id='photoSmall' src='/media/" . $perfil["photo"] . "' alt=''>";
                     echo "<p>" . $perfil["categoria_profesional"] . "</p>";
                     echo "<a href='/portfolio/" . $perfil["id"] . "'>Ver perfil</a>";
                     echo "</li>";
