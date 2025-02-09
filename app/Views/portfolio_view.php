@@ -44,7 +44,9 @@ $perfiles = $data["perfiles"];
             foreach ($data["portfolio"]["jobs"] as $job) {
                 echo "<div class='job'>";
                 echo "<h4> Trabajo: " . $job["title"] . "</h4>";
-                echo "<a href='/edit/job/" . $job["id"] . "'>Editar</a> <a href='/delete/job/" . $job["id"] . "'>Borrar</a>";
+                if ($data["portfolio"]["id"] == $_SESSION["usuario"]["id"]) {
+                    echo "<a href='/edit/job/" . $job["id"] . "'>Editar</a> <a href='/delete/job/" . $job["id"] . "'>Borrar</a>";
+                }
                 echo "<ul>";
                 echo "<li> Descripcion: " . $job["description"] . "</li>";
                 echo "<li> Fecha de Inicio: " . $job["start_date"] . "</li>";
@@ -63,7 +65,9 @@ $perfiles = $data["perfiles"];
             foreach ($data["portfolio"]["projects"] as $project) {
                 echo "<div class='job'>";
                 echo "<h4> Proyecto: " . $project["title"] . "</h4>";
-                echo "<a href='/edit/project/" . $project["id"] . "'>Editar</a> <a href='/delete/project/" . $project["id"] . "'>Borrar</a>";
+                if ($data["portfolio"]["id"] == $_SESSION["usuario"]["id"]) {
+                    echo "<a href='/edit/project/" . $project["id"] . "'>Editar</a> <a href='/delete/project/" . $project["id"] . "'>Borrar</a>";
+                }
                 echo "<ul>";
                 echo "<li> Descripcion: " . $project["description"] . "</li>";
                 echo "<li> Technologies: " . $project["technologies"] . "</li>";
@@ -80,7 +84,9 @@ $perfiles = $data["perfiles"];
             foreach ($data["portfolio"]["skills"] as $skill) {
                 echo "<div class='job'>";
                 echo "<h4> Skill: " . $skill["name"] . "</h4>";
-                echo "<a href='/edit/skill/" . $skill["id"] . "'>Editar</a> <a href='/delete/skill/" . $skill["id"] . "'>Borrar</a>";
+                if ($data["portfolio"]["id"] == $_SESSION["usuario"]["id"]) {
+                    echo "<a href='/edit/skill/" . $skill["id"] . "'>Editar</a> <a href='/delete/skill/" . $skill["id"] . "'>Borrar</a>";
+                }
                 echo "</div>";
             }
             echo "</div>";
@@ -93,7 +99,9 @@ $perfiles = $data["perfiles"];
             foreach ($data["portfolio"]["socialNetworks"] as $socialNetwork) {
                 echo "<div class='job'>";
                 echo "<h4> Red: " . $socialNetwork["name"] . "</h4>";
-                echo "<a href='/edit/social/" . $socialNetwork["id"] . "'>Editar</a> <a href='/delete/social/" . $socialNetwork["id"] . "'>Borrar</a>";
+                if ($data["portfolio"]["id"] == $_SESSION["usuario"]["id"]) {
+                    echo "<a href='/edit/social/" . $socialNetwork["id"] . "'>Editar</a> <a href='/delete/social/" . $socialNetwork["id"] . "'>Borrar</a>";
+                }
                 echo "<h5> URL: <a href='" . $socialNetwork["url"] . "' target='_blank'>" . $socialNetwork["url"] . "</a></h5>";
                 echo "</div>";
             }
