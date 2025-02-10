@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Pablo">
     <title>PortManager</title>
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/portfolio.css">
 </head>
 
 <?php
@@ -26,6 +26,7 @@ $perfiles = $data["perfiles"];
             <li><a href="/">Home</a></li>
             <?php
             echo "<li><a href='/portfolio/" . $_SESSION["usuario"]["id"] . "'>Mi portfolio</a></li>";
+            echo "<li><a href='/profile/" . $_SESSION["usuario"]["id"] . "'>Mi perfil</a></li>";
             ?>
             <li><a href="/logout">Cerrar sesión</a></li>
         </ul>
@@ -34,7 +35,6 @@ $perfiles = $data["perfiles"];
         <main>
             <h2>Mi portfolio</h2>
             <?php
-            echo "<h2>" . $data["portfolio"]["title"] . "</h2>";
             echo "<img id='photoSmall' src='/media/" . $data["portfolio"]["photo"] . "' alt=''>";
             echo "<div>";
             echo "<h4>Experiencia</h4>";

@@ -1,6 +1,3 @@
-<?php
-var_dump($_FILES);
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,9 +28,9 @@ var_dump($_FILES);
     <div class="mainDiv">
         <main>
             <!-- Asegurarse de agregar enctype="multipart/form-data" para permitir la carga de archivos -->
+            <h2>Mi perfil</h2>
             <form action="" method="POST">
                 <div>
-                    <h2><?php echo $data["usuario"]["name"] . " " . $data["usuario"]["surname"] ?></h2>
                     <label for="name">Nombre</label><br><br>
                     <input type="text" name="name" id="name" value="<?php echo $data["usuario"]["name"] ?>">
 

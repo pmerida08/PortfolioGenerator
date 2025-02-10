@@ -107,6 +107,10 @@ nav ul li a:hover {
     background-color: #f8f9fa;
 }
 
+#profile p {
+    text-align: center;
+}
+
 main {
     margin: 20px;
     padding: 20px;

@@ -36,20 +36,24 @@ class ProfileController extends BaseController
             $userModel->setSurname($_POST["surname"] ?? $usuario["surname"]);
             $userModel->setEmail($_POST["email"] ?? $usuario["email"]);
 
-            // Verificar si hay una nueva foto
+            // Verificar si hay una nueva photo
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
                 // Verificar la carpeta de destino
-                $uploadDir = '../public/media/'; // Cambia esto a la ruta correcta
-                $uploadFile = $uploadDir . basename($_FILES['photo']['name']);
+                $photo = $_FILES['photo'];
+                $imagenesDir = __DIR__ . '/../../public/imagenes/';
 
-                // Mover el archivo
-                if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadFile)) {
-                    $userModel->setPhoto($_FILES['photo']['name']);
+                if (!is_dir($imagenesDir)) {
+                    mkdir($imagenesDir, 0777, true);
+                }
+                $fotoRuta = $imagenesDir . $photo['name'];
+
+                if (move_uploaded_file($photo['tmp_name'], $fotoRuta)) {
+                    $data['photo'] = $photo['name'];
                 } else {
                     echo "Error al mover el archivo.";
                 }
             } else {
-                // Si no hay foto nueva, usar la existente
+                // Si no hay photo nueva, usar la existente
                 $userModel->setPhoto($usuario["photo"]);
             }
 

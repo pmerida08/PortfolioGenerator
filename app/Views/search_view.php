@@ -28,6 +28,7 @@ $perfiles = $data["perfiles"];
                 <li><a href="/login">Iniciar sesión</a></li>
                 <?php } else {
                 echo "<li><a href='/portfolio/" . $_SESSION["usuario"]["id"] . "'>Mi portfolio</a></li>";
+                echo "<li><a href='/profile/" . $_SESSION["usuario"]["id"] . "'>Mi perfil</a></li>";
                 foreach ($data["perfiles"] as $perfil) { ?>
                     <?php if ($_SESSION["usuario"]["id"] == $perfil["id"]) { ?>
                         <li><a href=" /visibility">
@@ -38,10 +39,11 @@ $perfiles = $data["perfiles"];
                 <li><a href="/logout">Cerrar sesión</a></li>
             <?php }; ?>
             <li>
-                <form action="" method="POST">
-                    <input type="text" name="termino" id="termino" placeholder="Buscar...">
+                <form action="/search/" method="GET">
+                    <input type="text" name="termino" id="termino" placeholder="Buscar..." value="<?= $_GET["termino"] ?? '' ?>">
                     <input type="submit" value="Buscar">
                 </form>
+
             </li>
         </ul>
     </nav>

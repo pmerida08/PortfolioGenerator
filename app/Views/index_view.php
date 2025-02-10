@@ -39,7 +39,7 @@ $perfiles = $data["perfiles"];
                 <li><a href="/logout">Cerrar sesión</a></li>
             <?php }; ?>
             <li>
-                <form action="/search/" method="POST">
+                <form action="/search/" method="GET">
                     <input type="text" name="termino" id="termino" placeholder="Buscar...">
                     <input type="submit" value="Buscar">
                 </form>

@@ -34,11 +34,13 @@ $router->add(
 $router->add(
     array(
         "name" => "search",
-        "path" => "/^\/search\/$/",
+        "path" => "/^\/search\/\?termino=([^&]+)$/", // Ruta más flexible para el término de búsqueda
         "action" => [IndexController::class, "searchAction"],
         "auth" => ["usuario", "invitado"]
     )
 );
+
+
 
 $router->add(
     array(

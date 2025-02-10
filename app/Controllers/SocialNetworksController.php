@@ -21,7 +21,8 @@ class SocialNetworksController extends BaseController
 
 
         if ($userIdJob != $_SESSION["usuario"]["id"]) {
-            echo "No tienes permisos para editar estos datos";
+            header("Location: /");
+            exit();
         }
 
         if (isset($_POST) && !empty($_POST)) {
