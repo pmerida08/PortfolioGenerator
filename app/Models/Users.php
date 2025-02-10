@@ -21,6 +21,11 @@ class Users extends DBAbstractModel
     private $active_account;
 
 
+    private $jobs = [];
+    private $skills = [];
+    private $socialNetworks = [];
+    private $projects = [];
+
     private static $instancia;
 
     public static function getInstancia()
@@ -212,12 +217,53 @@ class Users extends DBAbstractModel
         $this->get_results_from_query();
     }
 
+    public function getJobs()
+    {
+        $this->query = "SELECT * FROM jobs WHERE user_id = :id";
+        $this->params["id"] = $_SESSION["usuario"]["id"];
+        $this->get_results_from_query();
+        return $this->rows ?? [];
+    }
+
+    public function getSkills()
+    {
+        $this->query = "SELECT * FROM skills WHERE user_id = :id";
+        $this->params["id"] = $_SESSION["usuario"]["id"];
+        $this->get_results_from_query();
+        return $this->rows ?? [];
+    }
+
+    public function getSocialNetworks()
+    {
+        $this->query = "SELECT * FROM social_networks WHERE user_id = :id";
+        $this->params["id"] = $_SESSION["usuario"]["id"];
+        $this->get_results_from_query();
+        return $this->rows ?? [];
+    }
+
+    public function getProjects()
+    {
+        $this->query = "SELECT * FROM projects WHERE user_id = :id";
+        $this->params["id"] = $_SESSION["usuario"]["id"];
+        $this->get_results_from_query();
+        return $this->rows ?? [];
+    }
+
     public function get()
     {
         $this->query = "SELECT * FROM users WHERE id = :id";
         $this->params["id"] = $_SESSION["usuario"]["id"];
         $this->get_results_from_query();
-        return $this->rows[0] ?? "";
+        $usuario = $this->rows[0] ?? "";
+
+        if($usuario){
+            $this->jobs = $this->getJobs();
+            $this->skills = $this->getSkills();
+            $this->socialNetworks = $this->getSocialNetworks();
+            $this->projects = $this->getProjects();
+        }
+
+        return $usuario;
     }
     public function set() {
         $this->query = "UPDATE users SET name = :name, surname = :surname, photo = :photo, categoria_profesional = :categoria_profesional, email = :email, profile_summary = :profile_summary WHERE id = :id";
@@ -231,7 +277,15 @@ class Users extends DBAbstractModel
         $this->get_results_from_query();
     }
     public function edit() {
-    
+        $this->query = "UPDATE users SET name = :name, surname = :surname, photo = :photo, categoria_profesional = :categoria_profesional, email = :email, profile_summary = :profile_summary WHERE id = :id";
+        $this->params["id"] = $_SESSION["usuario"]["id"];
+        $this->params["name"] = $_POST["name"];
+        $this->params["surname"] = $_POST["surname"];
+        $this->params["photo"] = $_POST["photo"];
+        $this->params["categoria_profesional"] = $_POST["categoria_profesional"];
+        $this->params["email"] = $_POST["email"];
+        $this->params["profile_summary"] = $_POST["profile_summary"];
+        $this->get_results_from_query();
     }
     public function delete($id)
     {

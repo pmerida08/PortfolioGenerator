@@ -28,6 +28,7 @@ $perfiles = $data["perfiles"];
                 <li><a href="/login">Iniciar sesión</a></li>
                 <?php } else {
                 echo "<li><a href='/portfolio/" . $_SESSION["usuario"]["id"] . "'>Mi portfolio</a></li>";
+                echo "<li><a href='/profile/" . $_SESSION["usuario"]["id"] . "'>Mi perfil</a></li>";
                 foreach ($data["perfiles"] as $perfil) { ?>
                     <?php if ($_SESSION["usuario"]["id"] == $perfil["id"]) { ?>
                         <li><a href=" /visibility">
@@ -57,6 +58,8 @@ $perfiles = $data["perfiles"];
                     echo "<h3>" . $perfil["name"] . " " . $perfil["surname"] . "</h3>";
                     echo "<img id='photoSmall' src='./media/" . $perfil["photo"] . "' alt=''>";
                     echo "<p>" . $perfil["categoria_profesional"] . "</p>";
+                    echo "<p>" . $perfil["email"] . "</p>";
+                    echo "<p>" . $perfil["profile_summary"] . "</p>";
                     echo "<a href='/portfolio/" . $perfil["id"] . "'>Ver perfil</a>";
                     echo "</li>";
                 }

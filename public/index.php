@@ -5,6 +5,7 @@ use App\Core\Router;
 use App\Controllers\IndexController;
 use App\Controllers\JobsController;
 use App\Controllers\PortfolioController;
+use App\Controllers\ProfileController;
 use App\Controllers\ProjectsController;
 use App\Controllers\SkillsController;
 use App\Controllers\SocialNetworksController;
@@ -91,6 +92,16 @@ $router->add(array(
     "action" => [AuthController::class, "activateAction"],
     "auth" => ["invitado"]
 ));
+
+
+$router->add(
+    array(
+        "name" => "Editar",
+        "path" => "/^\/profile\/([0-9]+)$/",
+        "action" => [ProfileController::class, "indexAction"],
+        "auth" => ["usuario"]
+    )
+);
 
 
 $router->add(
